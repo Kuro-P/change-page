@@ -1,0 +1,231 @@
+*{
+	padding:0;
+	margin:0;
+}
+/*实现全屏无滚动条的核心：body{overflow:hidden;}*/
+body{
+	font-family:"Microsoft YaHei","黑体",sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	font-style:normal;
+	overflow:hidden;
+	height:100%;
+}
+a{
+	text-decoration:none;
+	z-index:1;
+}
+input{
+	z-index:2;
+	opacity:0;
+}
+
+.out-container{
+	width:100%;
+	height:100%;
+}
+@font-face{
+	font-family:"raphaelicons";
+	src:url('../fonts/raphaelicons-webfont.ttf') format('truetype'),
+		url('../fonts/raphaelicons-webfont.woff') format('woff'),
+		url('../fonts/raphaelicons-webfont.eot') format('eot'),
+		url('../fonts/raphaelicons-webfont.svg') format('svg');
+	font-style:normal;
+}
+
+/*导航栏的样式*/
+	/*input与a标签共有的样式*/
+ .selector{
+	position:absolute;
+	bottom:0;
+	width:20%;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	font-weight:500;
+	font-size:20px;
+	letter-spacing:3px;
+	text-shadow:1px 1px 1px rgba(0,0,0,.3);
+	color:#fff;
+	background:rgba(24,143,28,1);/*rgba最后一个参数要加上，chrome会不识别*/
+}
+	/*滑过及选中样式*/
+input:hover + a{
+	background:rgba(19,111,21,1);
+}
+input:checked + a{
+	background: rgba(15,90,17,1);
+}
+input:checked + a::before{
+	content:"";
+	position:absolute;
+	border-width:10px 16px;
+	border-style: solid;
+	border-color:transparent transparent rgba(15,90,17,1) transparent;
+	width:0;
+	height:0;
+	bottom:39px;
+	left:50%;
+	margin-left:-16px;
+}
+.loc_1{
+	left:0%;
+}
+.loc_2{
+	left:20%;
+}
+.loc_3{
+	left:40%;
+}
+.loc_4{
+	left:60%;
+}
+.loc_5{
+	left:80%;
+}
+
+/*面板样式*/
+.container {
+	width:100%;
+	height:100%;
+	position:absolute;
+	left:0px;
+	top:0px;
+	transform:translate3d(0,0,0);
+	transition:transform .7s ease-in-out;
+}
+.container .panel{
+	width:100%;
+	height:100%;
+	position:relative;
+	overflow:hidden;
+}
+@keyframes fadeIn{
+	from{
+/* 		padding-top:12%; */
+		transform:translateY(-30px);
+		opacity:0;
+	}
+	to{
+/* 		padding-top:15%; */
+		transform:translateY(0px);
+		opacity:1;
+	}
+}
+@keyframes fadeOut{
+	from{
+		transform:translateY(30px);
+		opacity:0;
+	}
+	to{
+		transform:translateY(0);
+		opacity:1;
+	}
+}
+h1{
+	display:block;
+	width:300px;
+	text-align:center;
+	padding-top:15%;
+	margin:0 auto;
+	font-size:50px;
+	color:rgba(19,111,21,1);
+	text-shadow:1px 1px 1px rgba(0,0,0,.3);
+	/*animation:fadeIn .7s ease-out forwards;*/
+}
+p{
+	width:100%;
+/* 	display:block; */
+	text-align:center;
+/* 	padding-left:50%; */
+/* 	margin-left:-250px; */
+	margin-top:20px;
+	color:#aaa;
+}
+h1::selection,p::selection{
+	background:green;
+	color:#fff;
+}
+div.deta{
+	width:200px;
+	height:200px;
+	background: #fff;
+	position:absolute;
+	left:50%;
+	margin-left:-100px;
+ 	transform:translateY(-50%)  rotate(45deg); 	
+	background-color:green; /*  rgba(15,90,17,1) */
+}
+div[data-icon]::after{
+	content:attr(data-icon);
+	text-shadow:1px 1px 2px rgba(0,0,0,.5);
+	position:absolute;
+	top:50%;
+	left:50%;
+ 	transform:rotate(-45deg) translateY(-50%) ; 
+	width:200px;
+	height:200px;
+	line-height:230px;
+	font-size:120px;
+	text-align:center;
+/* 	background: rgba(0,0,0,.2); */
+	color:#fff;
+	font-family:"raphaelicons";
+}
+section.green{
+	background: green;
+}
+.green .deta{
+	background-color: #fff;
+}
+.green .deta::after{
+	color:green;
+}
+.green h1{
+	color:#fff;
+}
+.green p{
+	color:#ccc;
+}
+.green h1::selection,.green p::selection{
+	background:#fff;
+	color:green;
+}
+
+/*点击按钮实现切换功能*/
+#selector_1:checked ~ .container{
+	/*top:0%;*/
+	transform:translateY(0);
+}
+#selector_2:checked ~ .container{
+	/*top:-100%;*/
+	transform:translateY(-100%);
+}
+#selector_3:checked ~ .container{
+	/*top:-200%;*/
+	transform:translateY(-200%);
+}
+#selector_4:checked ~ .container{
+	/*top:-300%;*/
+	transform:translateY(-300%);
+}
+#selector_5:checked ~ .container{
+	/*top:-400%;*/
+	transform:translateY(-400%);
+}
+#selector_1:checked ~ .container #panel_1 h1, 
+#selector_2:checked ~ .container #panel_2 h1,
+#selector_3:checked ~ .container #panel_3 h1,
+#selector_4:checked ~ .container #panel_4 h1,
+#selector_5:checked ~ .container #panel_5 h1
+{
+	animation:fadeIn .6s ease-out backwards .2s;
+}
+#selector_1:checked ~ .container #panel_1 p, 
+#selector_2:checked ~ .container #panel_2 p,
+#selector_3:checked ~ .container #panel_3 p,
+#selector_4:checked ~ .container #panel_4 p,
+#selector_5:checked ~ .container #panel_5 p
+{
+	animation:fadeOut .6s ease-out backwards .2s;
+}
