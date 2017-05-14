@@ -229,3 +229,29 @@ section.green{
 {
 	animation:fadeOut .6s ease-out backwards .2s;
 }
+//引入媒体查询
+@media screen and (max-width: 520px){
+	h1{ 
+		padding-top:40%;
+		font-size:24px;
+	}
+	p{
+		width:90%;
+		left:10%;
+		margin:10px auto auto;
+	}
+	.selector{
+		font-size:14px;
+		letter-spacing:1px;
+	}
+	div.deta{
+		width:150px;
+		height:150px;
+		margin-left:-75px;
+	}
+	div[data-icon]::after{
+		width:150px;
+		height:150px;
+		line-height:150px;
+		font-size:120px;
+	}
